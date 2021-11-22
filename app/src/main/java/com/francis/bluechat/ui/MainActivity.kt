@@ -1,11 +1,16 @@
 package com.francis.bluechat.ui
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.bluetooth.BluetoothAdapter
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.francis.bluechat.R
 import com.francis.bluechat.application.MainApplication
 import com.francis.bluechat.databinding.ActivityMainBinding
+import com.francis.bluechat.utils.SnackBarUtil
 import com.francis.bluechat.utils.missingSystemFeature
 import javax.inject.Inject
 
@@ -28,6 +34,16 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
+    private val bluetoothLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                Log.d(TAG, "Bluetooth Launcher: ${Activity.RESULT_OK}")
+                TODO("Check for available devices.")
+            } else {
+                SnackBarUtil.instance?.showSnackBar(this, "Error turning on bluetooth")
+            }
+        }
+
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             .inject(this)
 
         checkBluetoothFeature()
+        checkToEnable()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -46,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.visibility -> {
 
             }
@@ -63,11 +80,26 @@ class MainActivity : AppCompatActivity() {
                 setPositiveButton(getString(R.string.text_OK)) { d, _ ->
                     d.dismiss()
                 }
-                setOnDismissListener { d ->
+                setOnDismissListener { _ ->
                     finish()
                 }
                 create()
             }.show()
         }
+    }
+
+    private fun checkToEnable() {
+        val adapter = BluetoothAdapter.getDefaultAdapter()
+        if (adapter != null && !adapter.isEnabled) {
+            Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE).let { intent ->
+                bluetoothLauncher.launch(intent)
+            }
+        } else if (adapter.isEnabled) {
+            TODO("Check for available devices.")
+        }
+    }
+
+    companion object {
+        const val TAG = "MainActivity"
     }
 }
