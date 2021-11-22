@@ -5,18 +5,20 @@
     <data>
         <variable
             name="listener"
-            type="com.francis.bluechat.DeviceAdapter.DeviceClickListener" />
+            type="com.francis.bluechat.ui.adapter.DeviceAdapter.DeviceClickListener" />
         <variable
             name="device"
-            type="com.francis.bluechat.Device" />
+            type="com.francis.bluechat.data.Device" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@drawable/item_device_background"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/item_height"
+        android:layout_marginHorizontal="@dimen/padding_standard"
+        android:layout_marginVertical="@dimen/padding_half"
         android:onClick="@{() -> listener.onclick(device)}"
-        android:padding="16dp">
+        android:padding="@dimen/padding_standard">
 
         <ImageView
             android:id="@+id/phone"
@@ -31,7 +33,7 @@
             android:id="@+id/device_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
+            android:layout_marginHorizontal="@dimen/padding_x_large"
             app:layout_constraintBottom_toTopOf="@id/type"
             app:layout_constraintEnd_toStartOf="@+id/next"
             app:layout_constraintStart_toEndOf="@+id/phone"

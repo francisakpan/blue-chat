@@ -1,7 +1,7 @@
 package com.francis.bluechat.dagger
 
 import android.app.Application
-import com.francis.bluechat.MainActivity
+import com.francis.bluechat.ui.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 

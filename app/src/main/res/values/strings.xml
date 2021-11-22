@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">BlueChat</string>
+    <string name="menu_item_visibility_title">Visibility</string>
+    <string name="bluetooth_unavailable_dialog_title">Missing Feature</string>
+    <string name="bluetooth_unavailable_dialog_message">This device does not support bluetooth technology.</string>
+    <string name="text_OK">OK</string>
 </resources>
