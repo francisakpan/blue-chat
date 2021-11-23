@@ -33,7 +33,7 @@ class DeviceAdapter(private val listener: DeviceClickListener) :
                     inflater,
                     R.layout.item_device,
                     parent,
-                    true
+                    false
                 )
                 return ViewHolder(binding)
             }

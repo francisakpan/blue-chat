@@ -3,20 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="listener"
             type="com.francis.bluechat.ui.adapter.DeviceAdapter.DeviceClickListener" />
+
         <variable
             name="device"
             type="com.francis.bluechat.data.Device" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/item_device_background"
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height"
         android:layout_marginHorizontal="@dimen/padding_standard"
         android:layout_marginVertical="@dimen/padding_half"
+        android:background="@drawable/item_device_background"
+        android:clickable="true"
+        android:focusable="true"
         android:onClick="@{() -> listener.onclick(device)}"
         android:padding="@dimen/padding_standard">
 
@@ -34,10 +38,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_x_large"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@{device.name}"
             app:layout_constraintBottom_toTopOf="@id/type"
             app:layout_constraintEnd_toStartOf="@+id/next"
             app:layout_constraintStart_toEndOf="@+id/phone"
-            android:text="@{device.name}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -54,8 +60,8 @@
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_right"
             android:background="@drawable/ic_circle"
+            android:src="@drawable/ic_right"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

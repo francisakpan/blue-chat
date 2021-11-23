@@ -1,7 +1,7 @@
 package com.francis.bluechat.dagger
 
 import android.app.Application
-import com.francis.bluechat.ui.MainActivity
+import com.francis.bluechat.ui.dagger.MainComponent
 import dagger.BindsInstance
 import dagger.Component
 
@@ -14,5 +14,5 @@ interface ApplicationComponent {
         fun create(@BindsInstance instance: Application): ApplicationComponent
     }
 
-    fun inject(target: MainActivity)
+    fun mainComponent() : MainComponent.Factory
 }
