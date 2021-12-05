@@ -4,4 +4,5 @@
     <string name="bluetooth_unavailable_dialog_title">Missing Feature</string>
     <string name="bluetooth_unavailable_dialog_message">This device does not support bluetooth technology.</string>
     <string name="text_OK">OK</string>
+    <string name="snackbar_action_text">Turn on</string>
 </resources>
